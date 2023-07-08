@@ -24,8 +24,10 @@ public class UserController {
 
 	@GetMapping
 	Flux<User> list() {
-		return WebClient.create().get().uri("https://jsonplaceholder.typicode.com/todos")
+		WebClient.create().get().uri("https://jsonplaceholder.typicode.com/todos")
 				.retrieve()
-				.bodyToFlux(User.class);
+				.bodyToFlux(String.class)
+				.subscribe(System.out::println);
+		 return userRepository.findAll();
 	}
 }
